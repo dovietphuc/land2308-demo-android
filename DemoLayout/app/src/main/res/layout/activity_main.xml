@@ -22,9 +22,9 @@
 
     <TextView
         android:id="@+id/txt_count"
+        android:background="@drawable/switch_drawable"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#ffff00"
         android:layout_below="@id/btn_toast"
         android:layout_above="@id/btn_count"
         android:text="0"
