@@ -11,6 +11,11 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlin.random.Random
 
 class StringListAdapter : RecyclerView.Adapter<StringListAdapter.StringViewHolder>() {
+    interface OnItemClickListener {
+        fun onItemClick(view: View, position: Int)
+    }
+    var onItemClickListener: OnItemClickListener? = null
+
     var data: List<Student> = emptyList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StringViewHolder {
@@ -28,6 +33,10 @@ class StringListAdapter : RecyclerView.Adapter<StringListAdapter.StringViewHolde
             holder.itemView.setBackgroundColor(Color.RED)
         } else {
             holder.itemView.setBackgroundColor(Color.WHITE)
+        }
+        holder.itemView.transitionName = "item"
+        holder.itemView.setOnClickListener {view ->
+            onItemClickListener?.onItemClick(view, position)
         }
     }
 

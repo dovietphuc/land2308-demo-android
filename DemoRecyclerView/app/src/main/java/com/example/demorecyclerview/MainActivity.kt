@@ -1,7 +1,10 @@
 package com.example.demorecyclerview
 
+import android.app.ActivityOptions
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.ItemTouchHelper.Callback
 import androidx.recyclerview.widget.ItemTouchHelper.SimpleCallback
@@ -42,6 +45,19 @@ class MainActivity : AppCompatActivity() {
         val recyclerView = findViewById<RecyclerView>(R.id.rcv)
         val adapter = StringListAdapter()
         adapter.data = data
+        adapter.onItemClickListener = object : StringListAdapter.OnItemClickListener {
+            override fun onItemClick(view: View, position: Int) {
+                val option =
+                    ActivityOptions
+                    .makeSceneTransitionAnimation(
+                        this@MainActivity, view, "item")
+                startActivity(
+                    Intent(this@MainActivity, PlaybackActivity::class.java)
+                        .putExtra("MESSAGE", data[position].name),
+                        option.toBundle()
+                    )
+            }
+        }
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
 
