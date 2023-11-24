@@ -9,6 +9,7 @@
         android:layout_height="match_parent"
         android:textAppearance="@style/TextAppearance.AppCompat.Title"
         android:text="First Fragment"
+        android:textSize="34sp"
         android:gravity="center"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

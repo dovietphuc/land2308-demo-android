@@ -6,15 +6,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.lifecycle.ViewModelProvider
 
-class SecondFragment(val message: String) : Fragment(R.layout.fragment_second) {
+class SecondFragment() : Fragment(R.layout.fragment_second) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val txtMessage = view.findViewById<TextView>(R.id.txt_message)
-        txtMessage.text = message
-//        arguments?.let {
-//            txtMessage.text = it.getString("MESSAGE")
-//        }
+        activity?.let { activity ->
+            val mainViewModel =
+                ViewModelProvider(activity)[MainActivityViewModel::class.java]
+            val btnCount = view.findViewById<TextView>(R.id.btn_count)
+            btnCount.setOnClickListener {
+                mainViewModel.increment()
+            }
+        }
     }
 }

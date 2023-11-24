@@ -12,6 +12,10 @@ class MainActivity : AppCompatActivity() {
             supportFragmentManager.beginTransaction()
                 .replace(R.id.host_container, FirstFragment())
                 .commit()
+
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.host_container_2, SecondFragment())
+                .commit()
         }
     }
 }

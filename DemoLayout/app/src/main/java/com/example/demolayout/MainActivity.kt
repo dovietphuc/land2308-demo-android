@@ -7,10 +7,11 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
 
 class MainActivity : AppCompatActivity() {
 
-    var value = 0
+    lateinit var viewModel: MainActivityViewModel
     lateinit var txtValue: TextView
     lateinit var btnToast: Button
     lateinit var btnCount: Button
@@ -19,32 +20,25 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        if(savedInstanceState != null) {
-            value = savedInstanceState.getInt("VALUE")
-        }
+        viewModel =
+            ViewModelProvider(this)[MainActivityViewModel::class.java]
 
         txtValue = findViewById(R.id.txt_count)
         btnCount = findViewById(R.id.btn_count)
         btnToast = findViewById(R.id.btn_toast)
 
-        txtValue.text = value.toString()
+        viewModel.value.observe(this) { v ->
+            txtValue.text = v.toString()
+        }
 
         btnCount.setOnClickListener {
-            value++
-            txtValue.text = value.toString()
-
-            val background = txtValue.background as TransitionDrawable
-            background.reverseTransition(300)
+            viewModel.increment()
         }
 
         btnToast.setOnClickListener {
-            Toast.makeText(this, value.toString(), Toast.LENGTH_SHORT).show()
+            Toast.makeText(this,
+                viewModel.value.toString(), Toast.LENGTH_SHORT).show()
         }
 
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        outState.putInt("VALUE", value)
     }
 }
