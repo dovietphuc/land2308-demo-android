@@ -1,5 +1,6 @@
 package com.example.demolayout
 
+import android.content.SharedPreferences
 import android.graphics.BitmapFactory
 import android.graphics.drawable.TransitionDrawable
 import androidx.appcompat.app.AppCompatActivity
@@ -11,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 
 class MainActivity : AppCompatActivity() {
 
+    lateinit var preferences: SharedPreferences
     lateinit var viewModel: MainActivityViewModel
     lateinit var txtValue: TextView
     lateinit var btnToast: Button
@@ -40,5 +42,17 @@ class MainActivity : AppCompatActivity() {
                 viewModel.value.toString(), Toast.LENGTH_SHORT).show()
         }
 
+        preferences = getPreferences(MODE_PRIVATE)
+        viewModel.value.postValue(
+            preferences.getInt("VALUE", 0)
+        )
+    }
+
+    override fun onPause() {
+        super.onPause()
+        preferences
+            .edit()
+            .putInt("VALUE", viewModel.value.value!!)
+            .apply()
     }
 }
