@@ -1,33 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:padding="10dp">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <Button
-        android:id="@+id/btn_toast"
-        android:text="@string/toast"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+    <data>
+        <import type="android.graphics.Color" />
+        <variable
+            name="viewModel"
+            type="com.example.demolayout.MainActivityViewModel" />
+    </data>
 
-    <Button
-        android:id="@+id/btn_count"
-        android:text="@string/count"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"/>
-
-    <TextView
-        android:id="@+id/txt_count"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/btn_toast"
-        android:layout_above="@id/btn_count"
-        android:text="0"
-        android:textSize="100sp"
-        android:gravity="center"
-        android:textStyle="bold"/>
-</RelativeLayout>
+        tools:context=".MainActivity"
+        android:padding="10dp">
+
+        <Button
+            android:id="@+id/btn_toast"
+            android:text="@string/toast"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/btn_count"
+            android:text="@string/count"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true" />
+
+        <ImageView
+            android:id="@+id/txt_count"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/btn_toast"
+            android:layout_above="@id/btn_count" />
+    </RelativeLayout>
+</layout>
