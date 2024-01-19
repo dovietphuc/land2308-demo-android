@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "94253712220",
+    "project_id": "message-land2308-4ca52",
+    "storage_bucket": "message-land2308-4ca52.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:94253712220:android:bc091ebd6efcae19c93799",
+        "android_client_info": {
+          "package_name": "com.example.messageland2308"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCt585jr28xTXznmCxJkcMlAsbIf6JhSnw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
