@@ -5,12 +5,14 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.example.land2308githubuser.databinding.ActivityMainBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.lastOrNull
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import retrofit2.Call
@@ -32,15 +34,10 @@ class MainActivity : AppCompatActivity() {
 
         binding.rcvUser.adapter = adapter
 
-        CoroutineScope(Dispatchers.Main).launch {
-            viewModel.allUsers()
-                .flowOn(Dispatchers.IO)
-                .collectLatest {
-                    it?.let {
-                        adapter.data = it
-                        adapter.notifyDataSetChanged()
-                    }
-                }
+        lifecycleScope.launch {
+            viewModel.flow.collectLatest {
+                adapter.submitData(it)
+            }
         }
     }
 }

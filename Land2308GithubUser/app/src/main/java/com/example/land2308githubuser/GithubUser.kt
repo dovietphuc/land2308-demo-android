@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName
 data class GithubUser(
     @SerializedName("id")
     @Expose
-    val id: Long,
+    val id: Int,
     @SerializedName("login")
     @Expose
     val login: String,

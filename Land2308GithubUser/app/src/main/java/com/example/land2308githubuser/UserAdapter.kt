@@ -2,13 +2,26 @@ package com.example.land2308githubuser
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.paging.PagingDataAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.land2308githubuser.databinding.UserItemBinding
 
-class UserAdapter() : RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
-    var data: List<GithubUser> = emptyList()
+class GithubDiffCallback : DiffUtil.ItemCallback<GithubUser>() {
+    override fun areItemsTheSame(oldItem: GithubUser, newItem: GithubUser): Boolean {
+        return oldItem.id == newItem.id
+    }
 
+    override fun areContentsTheSame(oldItem: GithubUser, newItem: GithubUser): Boolean {
+        return oldItem.avatarUrl == newItem.avatarUrl && oldItem.login == newItem.login
+    }
+
+}
+
+class UserAdapter() : PagingDataAdapter<GithubUser, UserAdapter.UserViewHolder>(
+    GithubDiffCallback()
+) {
     class UserViewHolder(val binding: UserItemBinding)
                                 : RecyclerView.ViewHolder(binding.root) {
         fun bind(user: GithubUser) {
@@ -28,11 +41,10 @@ class UserAdapter() : RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
         )
     }
 
-    override fun getItemCount(): Int {
-        return data.size
-    }
-
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
-        holder.bind(data[position])
+        val item = getItem(position)
+        item?.let {
+            holder.bind(it)
+        }
     }
 }
